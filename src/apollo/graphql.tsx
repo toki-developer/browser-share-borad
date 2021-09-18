@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  date: any;
   timestamptz: any;
 };
 
@@ -62,115 +63,304 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
+/** columns and relationships of "borad" */
+export type Borad = {
+  __typename?: 'borad';
+  connect_num: Scalars['Int'];
+  created_at: Scalars['timestamptz'];
+  delete_date?: Maybe<Scalars['date']>;
+  delete_flag: Scalars['Int'];
+  id: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "borad" */
+export type Borad_Aggregate = {
+  __typename?: 'borad_aggregate';
+  aggregate?: Maybe<Borad_Aggregate_Fields>;
+  nodes: Array<Borad>;
+};
+
+/** aggregate fields of "borad" */
+export type Borad_Aggregate_Fields = {
+  __typename?: 'borad_aggregate_fields';
+  avg?: Maybe<Borad_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Borad_Max_Fields>;
+  min?: Maybe<Borad_Min_Fields>;
+  stddev?: Maybe<Borad_Stddev_Fields>;
+  stddev_pop?: Maybe<Borad_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Borad_Stddev_Samp_Fields>;
+  sum?: Maybe<Borad_Sum_Fields>;
+  var_pop?: Maybe<Borad_Var_Pop_Fields>;
+  var_samp?: Maybe<Borad_Var_Samp_Fields>;
+  variance?: Maybe<Borad_Variance_Fields>;
+};
+
+
+/** aggregate fields of "borad" */
+export type Borad_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Borad_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Borad_Avg_Fields = {
+  __typename?: 'borad_avg_fields';
+  connect_num?: Maybe<Scalars['Float']>;
+  delete_flag?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "borad". All fields are combined with a logical 'AND'. */
+export type Borad_Bool_Exp = {
+  _and?: Maybe<Array<Borad_Bool_Exp>>;
+  _not?: Maybe<Borad_Bool_Exp>;
+  _or?: Maybe<Array<Borad_Bool_Exp>>;
+  connect_num?: Maybe<Int_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  delete_date?: Maybe<Date_Comparison_Exp>;
+  delete_flag?: Maybe<Int_Comparison_Exp>;
+  id?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "borad" */
+export enum Borad_Constraint {
+  /** unique or primary key constraint */
+  BoradPkey = 'borad_pkey'
+}
+
+/** input type for incrementing numeric columns in table "borad" */
+export type Borad_Inc_Input = {
+  connect_num?: Maybe<Scalars['Int']>;
+  delete_flag?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "borad" */
+export type Borad_Insert_Input = {
+  connect_num?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  delete_date?: Maybe<Scalars['date']>;
+  delete_flag?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Borad_Max_Fields = {
+  __typename?: 'borad_max_fields';
+  connect_num?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  delete_date?: Maybe<Scalars['date']>;
+  delete_flag?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Borad_Min_Fields = {
+  __typename?: 'borad_min_fields';
+  connect_num?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  delete_date?: Maybe<Scalars['date']>;
+  delete_flag?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "borad" */
+export type Borad_Mutation_Response = {
+  __typename?: 'borad_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Borad>;
+};
+
+/** on conflict condition type for table "borad" */
+export type Borad_On_Conflict = {
+  constraint: Borad_Constraint;
+  update_columns?: Array<Borad_Update_Column>;
+  where?: Maybe<Borad_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "borad". */
+export type Borad_Order_By = {
+  connect_num?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  delete_date?: Maybe<Order_By>;
+  delete_flag?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: borad */
+export type Borad_Pk_Columns_Input = {
+  id: Scalars['String'];
+};
+
+/** select columns of table "borad" */
+export enum Borad_Select_Column {
+  /** column name */
+  ConnectNum = 'connect_num',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DeleteDate = 'delete_date',
+  /** column name */
+  DeleteFlag = 'delete_flag',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "borad" */
+export type Borad_Set_Input = {
+  connect_num?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  delete_date?: Maybe<Scalars['date']>;
+  delete_flag?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Borad_Stddev_Fields = {
+  __typename?: 'borad_stddev_fields';
+  connect_num?: Maybe<Scalars['Float']>;
+  delete_flag?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Borad_Stddev_Pop_Fields = {
+  __typename?: 'borad_stddev_pop_fields';
+  connect_num?: Maybe<Scalars['Float']>;
+  delete_flag?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Borad_Stddev_Samp_Fields = {
+  __typename?: 'borad_stddev_samp_fields';
+  connect_num?: Maybe<Scalars['Float']>;
+  delete_flag?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Borad_Sum_Fields = {
+  __typename?: 'borad_sum_fields';
+  connect_num?: Maybe<Scalars['Int']>;
+  delete_flag?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "borad" */
+export enum Borad_Update_Column {
+  /** column name */
+  ConnectNum = 'connect_num',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DeleteDate = 'delete_date',
+  /** column name */
+  DeleteFlag = 'delete_flag',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate var_pop on columns */
+export type Borad_Var_Pop_Fields = {
+  __typename?: 'borad_var_pop_fields';
+  connect_num?: Maybe<Scalars['Float']>;
+  delete_flag?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Borad_Var_Samp_Fields = {
+  __typename?: 'borad_var_samp_fields';
+  connect_num?: Maybe<Scalars['Float']>;
+  delete_flag?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Borad_Variance_Fields = {
+  __typename?: 'borad_variance_fields';
+  connect_num?: Maybe<Scalars['Float']>;
+  delete_flag?: Maybe<Scalars['Float']>;
+};
+
+
+/** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  /** delete data from the table: "users" */
-  delete_users?: Maybe<Users_Mutation_Response>;
-  /** delete single row from the table: "users" */
-  delete_users_by_pk?: Maybe<Users>;
-  /** delete data from the table: "videos" */
-  delete_videos?: Maybe<Videos_Mutation_Response>;
-  /** delete single row from the table: "videos" */
-  delete_videos_by_pk?: Maybe<Videos>;
-  /** insert data into the table: "users" */
-  insert_users?: Maybe<Users_Mutation_Response>;
-  /** insert a single row into the table: "users" */
-  insert_users_one?: Maybe<Users>;
-  /** insert data into the table: "videos" */
-  insert_videos?: Maybe<Videos_Mutation_Response>;
-  /** insert a single row into the table: "videos" */
-  insert_videos_one?: Maybe<Videos>;
-  /** update data of the table: "users" */
-  update_users?: Maybe<Users_Mutation_Response>;
-  /** update single row of the table: "users" */
-  update_users_by_pk?: Maybe<Users>;
-  /** update data of the table: "videos" */
-  update_videos?: Maybe<Videos_Mutation_Response>;
-  /** update single row of the table: "videos" */
-  update_videos_by_pk?: Maybe<Videos>;
+  /** delete data from the table: "borad" */
+  delete_borad?: Maybe<Borad_Mutation_Response>;
+  /** delete single row from the table: "borad" */
+  delete_borad_by_pk?: Maybe<Borad>;
+  /** insert data into the table: "borad" */
+  insert_borad?: Maybe<Borad_Mutation_Response>;
+  /** insert a single row into the table: "borad" */
+  insert_borad_one?: Maybe<Borad>;
+  /** update data of the table: "borad" */
+  update_borad?: Maybe<Borad_Mutation_Response>;
+  /** update single row of the table: "borad" */
+  update_borad_by_pk?: Maybe<Borad>;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_UsersArgs = {
-  where: Users_Bool_Exp;
+export type Mutation_RootDelete_BoradArgs = {
+  where: Borad_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Users_By_PkArgs = {
+export type Mutation_RootDelete_Borad_By_PkArgs = {
   id: Scalars['String'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_VideosArgs = {
-  where: Videos_Bool_Exp;
+export type Mutation_RootInsert_BoradArgs = {
+  objects: Array<Borad_Insert_Input>;
+  on_conflict?: Maybe<Borad_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Videos_By_PkArgs = {
-  id: Scalars['String'];
+export type Mutation_RootInsert_Borad_OneArgs = {
+  object: Borad_Insert_Input;
+  on_conflict?: Maybe<Borad_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_UsersArgs = {
-  objects: Array<Users_Insert_Input>;
-  on_conflict?: Maybe<Users_On_Conflict>;
+export type Mutation_RootUpdate_BoradArgs = {
+  _inc?: Maybe<Borad_Inc_Input>;
+  _set?: Maybe<Borad_Set_Input>;
+  where: Borad_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Users_OneArgs = {
-  object: Users_Insert_Input;
-  on_conflict?: Maybe<Users_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_VideosArgs = {
-  objects: Array<Videos_Insert_Input>;
-  on_conflict?: Maybe<Videos_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Videos_OneArgs = {
-  object: Videos_Insert_Input;
-  on_conflict?: Maybe<Videos_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_UsersArgs = {
-  _set?: Maybe<Users_Set_Input>;
-  where: Users_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Users_By_PkArgs = {
-  _set?: Maybe<Users_Set_Input>;
-  pk_columns: Users_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_VideosArgs = {
-  _inc?: Maybe<Videos_Inc_Input>;
-  _set?: Maybe<Videos_Set_Input>;
-  where: Videos_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Videos_By_PkArgs = {
-  _inc?: Maybe<Videos_Inc_Input>;
-  _set?: Maybe<Videos_Set_Input>;
-  pk_columns: Videos_Pk_Columns_Input;
+export type Mutation_RootUpdate_Borad_By_PkArgs = {
+  _inc?: Maybe<Borad_Inc_Input>;
+  _set?: Maybe<Borad_Set_Input>;
+  pk_columns: Borad_Pk_Columns_Input;
 };
 
 /** column ordering options */
@@ -191,125 +381,67 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
-  /** fetch data from the table: "users" */
-  users: Array<Users>;
-  /** fetch aggregated fields from the table: "users" */
-  users_aggregate: Users_Aggregate;
-  /** fetch data from the table: "users" using primary key columns */
-  users_by_pk?: Maybe<Users>;
-  /** fetch data from the table: "videos" */
-  videos: Array<Videos>;
-  /** fetch aggregated fields from the table: "videos" */
-  videos_aggregate: Videos_Aggregate;
-  /** fetch data from the table: "videos" using primary key columns */
-  videos_by_pk?: Maybe<Videos>;
+  /** fetch data from the table: "borad" */
+  borad: Array<Borad>;
+  /** fetch aggregated fields from the table: "borad" */
+  borad_aggregate: Borad_Aggregate;
+  /** fetch data from the table: "borad" using primary key columns */
+  borad_by_pk?: Maybe<Borad>;
 };
 
 
-export type Query_RootUsersArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Query_RootBoradArgs = {
+  distinct_on?: Maybe<Array<Borad_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<Borad_Order_By>>;
+  where?: Maybe<Borad_Bool_Exp>;
 };
 
 
-export type Query_RootUsers_AggregateArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Query_RootBorad_AggregateArgs = {
+  distinct_on?: Maybe<Array<Borad_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<Borad_Order_By>>;
+  where?: Maybe<Borad_Bool_Exp>;
 };
 
 
-export type Query_RootUsers_By_PkArgs = {
-  id: Scalars['String'];
-};
-
-
-export type Query_RootVideosArgs = {
-  distinct_on?: Maybe<Array<Videos_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Videos_Order_By>>;
-  where?: Maybe<Videos_Bool_Exp>;
-};
-
-
-export type Query_RootVideos_AggregateArgs = {
-  distinct_on?: Maybe<Array<Videos_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Videos_Order_By>>;
-  where?: Maybe<Videos_Bool_Exp>;
-};
-
-
-export type Query_RootVideos_By_PkArgs = {
+export type Query_RootBorad_By_PkArgs = {
   id: Scalars['String'];
 };
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** fetch data from the table: "users" */
-  users: Array<Users>;
-  /** fetch aggregated fields from the table: "users" */
-  users_aggregate: Users_Aggregate;
-  /** fetch data from the table: "users" using primary key columns */
-  users_by_pk?: Maybe<Users>;
-  /** fetch data from the table: "videos" */
-  videos: Array<Videos>;
-  /** fetch aggregated fields from the table: "videos" */
-  videos_aggregate: Videos_Aggregate;
-  /** fetch data from the table: "videos" using primary key columns */
-  videos_by_pk?: Maybe<Videos>;
+  /** fetch data from the table: "borad" */
+  borad: Array<Borad>;
+  /** fetch aggregated fields from the table: "borad" */
+  borad_aggregate: Borad_Aggregate;
+  /** fetch data from the table: "borad" using primary key columns */
+  borad_by_pk?: Maybe<Borad>;
 };
 
 
-export type Subscription_RootUsersArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Subscription_RootBoradArgs = {
+  distinct_on?: Maybe<Array<Borad_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<Borad_Order_By>>;
+  where?: Maybe<Borad_Bool_Exp>;
 };
 
 
-export type Subscription_RootUsers_AggregateArgs = {
-  distinct_on?: Maybe<Array<Users_Select_Column>>;
+export type Subscription_RootBorad_AggregateArgs = {
+  distinct_on?: Maybe<Array<Borad_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Users_Order_By>>;
-  where?: Maybe<Users_Bool_Exp>;
+  order_by?: Maybe<Array<Borad_Order_By>>;
+  where?: Maybe<Borad_Bool_Exp>;
 };
 
 
-export type Subscription_RootUsers_By_PkArgs = {
-  id: Scalars['String'];
-};
-
-
-export type Subscription_RootVideosArgs = {
-  distinct_on?: Maybe<Array<Videos_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Videos_Order_By>>;
-  where?: Maybe<Videos_Bool_Exp>;
-};
-
-
-export type Subscription_RootVideos_AggregateArgs = {
-  distinct_on?: Maybe<Array<Videos_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Videos_Order_By>>;
-  where?: Maybe<Videos_Bool_Exp>;
-};
-
-
-export type Subscription_RootVideos_By_PkArgs = {
+export type Subscription_RootBorad_By_PkArgs = {
   id: Scalars['String'];
 };
 
@@ -327,410 +459,27 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
 
-/** columns and relationships of "users" */
-export type Users = {
-  __typename?: 'users';
-  created_at: Scalars['timestamptz'];
+export type Branistorming_GetBoradQueryVariables = Exact<{
   id: Scalars['String'];
-  name: Scalars['String'];
-  profile_photo_url: Scalars['String'];
-  updated_at: Scalars['timestamptz'];
-};
-
-/** aggregated selection of "users" */
-export type Users_Aggregate = {
-  __typename?: 'users_aggregate';
-  aggregate?: Maybe<Users_Aggregate_Fields>;
-  nodes: Array<Users>;
-};
-
-/** aggregate fields of "users" */
-export type Users_Aggregate_Fields = {
-  __typename?: 'users_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Users_Max_Fields>;
-  min?: Maybe<Users_Min_Fields>;
-};
+}>;
 
 
-/** aggregate fields of "users" */
-export type Users_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Users_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
-export type Users_Bool_Exp = {
-  _and?: Maybe<Array<Users_Bool_Exp>>;
-  _not?: Maybe<Users_Bool_Exp>;
-  _or?: Maybe<Array<Users_Bool_Exp>>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  id?: Maybe<String_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  profile_photo_url?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "users" */
-export enum Users_Constraint {
-  /** unique or primary key constraint */
-  UsersPkey = 'users_pkey'
-}
-
-/** input type for inserting data into table "users" */
-export type Users_Insert_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  profile_photo_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate max on columns */
-export type Users_Max_Fields = {
-  __typename?: 'users_max_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  profile_photo_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** aggregate min on columns */
-export type Users_Min_Fields = {
-  __typename?: 'users_min_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  profile_photo_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** response of any mutation on the table "users" */
-export type Users_Mutation_Response = {
-  __typename?: 'users_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Users>;
-};
-
-/** on conflict condition type for table "users" */
-export type Users_On_Conflict = {
-  constraint: Users_Constraint;
-  update_columns?: Array<Users_Update_Column>;
-  where?: Maybe<Users_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "users". */
-export type Users_Order_By = {
-  created_at?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  profile_photo_url?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: users */
-export type Users_Pk_Columns_Input = {
-  id: Scalars['String'];
-};
-
-/** select columns of table "users" */
-export enum Users_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  ProfilePhotoUrl = 'profile_photo_url',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** input type for updating data in table "users" */
-export type Users_Set_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  profile_photo_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-};
-
-/** update columns of table "users" */
-export enum Users_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name',
-  /** column name */
-  ProfilePhotoUrl = 'profile_photo_url',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** columns and relationships of "videos" */
-export type Videos = {
-  __typename?: 'videos';
-  created_at: Scalars['timestamptz'];
-  description: Scalars['String'];
-  duration: Scalars['Int'];
-  id: Scalars['String'];
-  owner_id: Scalars['String'];
-  title: Scalars['String'];
-  updated_at: Scalars['timestamptz'];
-  video_url: Scalars['String'];
-};
-
-/** aggregated selection of "videos" */
-export type Videos_Aggregate = {
-  __typename?: 'videos_aggregate';
-  aggregate?: Maybe<Videos_Aggregate_Fields>;
-  nodes: Array<Videos>;
-};
-
-/** aggregate fields of "videos" */
-export type Videos_Aggregate_Fields = {
-  __typename?: 'videos_aggregate_fields';
-  avg?: Maybe<Videos_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<Videos_Max_Fields>;
-  min?: Maybe<Videos_Min_Fields>;
-  stddev?: Maybe<Videos_Stddev_Fields>;
-  stddev_pop?: Maybe<Videos_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Videos_Stddev_Samp_Fields>;
-  sum?: Maybe<Videos_Sum_Fields>;
-  var_pop?: Maybe<Videos_Var_Pop_Fields>;
-  var_samp?: Maybe<Videos_Var_Samp_Fields>;
-  variance?: Maybe<Videos_Variance_Fields>;
-};
-
-
-/** aggregate fields of "videos" */
-export type Videos_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Videos_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type Videos_Avg_Fields = {
-  __typename?: 'videos_avg_fields';
-  duration?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "videos". All fields are combined with a logical 'AND'. */
-export type Videos_Bool_Exp = {
-  _and?: Maybe<Array<Videos_Bool_Exp>>;
-  _not?: Maybe<Videos_Bool_Exp>;
-  _or?: Maybe<Array<Videos_Bool_Exp>>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  duration?: Maybe<Int_Comparison_Exp>;
-  id?: Maybe<String_Comparison_Exp>;
-  owner_id?: Maybe<String_Comparison_Exp>;
-  title?: Maybe<String_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-  video_url?: Maybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "videos" */
-export enum Videos_Constraint {
-  /** unique or primary key constraint */
-  VideosPkey = 'videos_pkey'
-}
-
-/** input type for incrementing numeric columns in table "videos" */
-export type Videos_Inc_Input = {
-  duration?: Maybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "videos" */
-export type Videos_Insert_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['String']>;
-  owner_id?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  video_url?: Maybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Videos_Max_Fields = {
-  __typename?: 'videos_max_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['String']>;
-  owner_id?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  video_url?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Videos_Min_Fields = {
-  __typename?: 'videos_min_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['String']>;
-  owner_id?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  video_url?: Maybe<Scalars['String']>;
-};
-
-/** response of any mutation on the table "videos" */
-export type Videos_Mutation_Response = {
-  __typename?: 'videos_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Videos>;
-};
-
-/** on conflict condition type for table "videos" */
-export type Videos_On_Conflict = {
-  constraint: Videos_Constraint;
-  update_columns?: Array<Videos_Update_Column>;
-  where?: Maybe<Videos_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "videos". */
-export type Videos_Order_By = {
-  created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  duration?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  owner_id?: Maybe<Order_By>;
-  title?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-  video_url?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: videos */
-export type Videos_Pk_Columns_Input = {
-  id: Scalars['String'];
-};
-
-/** select columns of table "videos" */
-export enum Videos_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Duration = 'duration',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  OwnerId = 'owner_id',
-  /** column name */
-  Title = 'title',
-  /** column name */
-  UpdatedAt = 'updated_at',
-  /** column name */
-  VideoUrl = 'video_url'
-}
-
-/** input type for updating data in table "videos" */
-export type Videos_Set_Input = {
-  created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  duration?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['String']>;
-  owner_id?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  video_url?: Maybe<Scalars['String']>;
-};
-
-/** aggregate stddev on columns */
-export type Videos_Stddev_Fields = {
-  __typename?: 'videos_stddev_fields';
-  duration?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Videos_Stddev_Pop_Fields = {
-  __typename?: 'videos_stddev_pop_fields';
-  duration?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Videos_Stddev_Samp_Fields = {
-  __typename?: 'videos_stddev_samp_fields';
-  duration?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type Videos_Sum_Fields = {
-  __typename?: 'videos_sum_fields';
-  duration?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "videos" */
-export enum Videos_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  Description = 'description',
-  /** column name */
-  Duration = 'duration',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  OwnerId = 'owner_id',
-  /** column name */
-  Title = 'title',
-  /** column name */
-  UpdatedAt = 'updated_at',
-  /** column name */
-  VideoUrl = 'video_url'
-}
-
-/** aggregate var_pop on columns */
-export type Videos_Var_Pop_Fields = {
-  __typename?: 'videos_var_pop_fields';
-  duration?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type Videos_Var_Samp_Fields = {
-  __typename?: 'videos_var_samp_fields';
-  duration?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type Videos_Variance_Fields = {
-  __typename?: 'videos_variance_fields';
-  duration?: Maybe<Scalars['Float']>;
-};
-
-export type SelectAllUserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SelectAllUserQuery = (
+export type Branistorming_GetBoradQuery = (
   { __typename?: 'query_root' }
-  & { users: Array<(
-    { __typename?: 'users' }
-    & Pick<Users, 'id' | 'name' | 'profile_photo_url' | 'created_at' | 'updated_at'>
+  & { borad_by_pk?: Maybe<(
+    { __typename?: 'borad' }
+    & Pick<Borad, 'id' | 'connect_num' | 'delete_date' | 'delete_flag' | 'created_at' | 'updated_at'>
   )> }
 );
 
 
-export const SelectAllUserDocument = gql`
-    query selectAllUser {
-  users {
+export const Branistorming_GetBoradDocument = gql`
+    query Branistorming_GetBorad($id: String!) {
+  borad_by_pk(id: $id) {
     id
-    name
-    profile_photo_url
+    connect_num
+    delete_date
+    delete_flag
     created_at
     updated_at
   }
@@ -738,28 +487,29 @@ export const SelectAllUserDocument = gql`
     `;
 
 /**
- * __useSelectAllUserQuery__
+ * __useBranistorming_GetBoradQuery__
  *
- * To run a query within a React component, call `useSelectAllUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useSelectAllUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useBranistorming_GetBoradQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBranistorming_GetBoradQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useSelectAllUserQuery({
+ * const { data, loading, error } = useBranistorming_GetBoradQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useSelectAllUserQuery(baseOptions?: Apollo.QueryHookOptions<SelectAllUserQuery, SelectAllUserQueryVariables>) {
+export function useBranistorming_GetBoradQuery(baseOptions: Apollo.QueryHookOptions<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SelectAllUserQuery, SelectAllUserQueryVariables>(SelectAllUserDocument, options);
+        return Apollo.useQuery<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>(Branistorming_GetBoradDocument, options);
       }
-export function useSelectAllUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SelectAllUserQuery, SelectAllUserQueryVariables>) {
+export function useBranistorming_GetBoradLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SelectAllUserQuery, SelectAllUserQueryVariables>(SelectAllUserDocument, options);
+          return Apollo.useLazyQuery<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>(Branistorming_GetBoradDocument, options);
         }
-export type SelectAllUserQueryHookResult = ReturnType<typeof useSelectAllUserQuery>;
-export type SelectAllUserLazyQueryHookResult = ReturnType<typeof useSelectAllUserLazyQuery>;
-export type SelectAllUserQueryResult = Apollo.QueryResult<SelectAllUserQuery, SelectAllUserQueryVariables>;
+export type Branistorming_GetBoradQueryHookResult = ReturnType<typeof useBranistorming_GetBoradQuery>;
+export type Branistorming_GetBoradLazyQueryHookResult = ReturnType<typeof useBranistorming_GetBoradLazyQuery>;
+export type Branistorming_GetBoradQueryResult = Apollo.QueryResult<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>;

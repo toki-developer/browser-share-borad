@@ -1,3 +1,4 @@
+import { gql } from "@apollo/client";
 import { useRouter } from "next/dist/client/router";
 
 const BrainstormingPage = () => {
@@ -11,3 +12,16 @@ const BrainstormingPage = () => {
 };
 
 export default BrainstormingPage;
+
+gql`
+  query Branistorming_GetBorad($id: String!) {
+    borad_by_pk(id: $id) {
+      id
+      connect_num
+      delete_date
+      delete_flag
+      created_at
+      updated_at
+    }
+  }
+`;
