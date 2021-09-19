@@ -851,6 +851,19 @@ export type OpinionsFragment = (
   & Pick<Branistorming_Opinions, 'id' | 'opinio' | 'user_id'>
 );
 
+export type CreateBoradMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type CreateBoradMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_borad_one?: Maybe<(
+    { __typename?: 'borad' }
+    & Pick<Borad, 'id'>
+  )> }
+);
+
 export const OpinionsFragmentDoc = gql`
     fragment Opinions on branistorming_opinions {
   id
@@ -934,3 +947,36 @@ export function useBranistorming_PostOpinionMutation(baseOptions?: Apollo.Mutati
 export type Branistorming_PostOpinionMutationHookResult = ReturnType<typeof useBranistorming_PostOpinionMutation>;
 export type Branistorming_PostOpinionMutationResult = Apollo.MutationResult<Branistorming_PostOpinionMutation>;
 export type Branistorming_PostOpinionMutationOptions = Apollo.BaseMutationOptions<Branistorming_PostOpinionMutation, Branistorming_PostOpinionMutationVariables>;
+export const CreateBoradDocument = gql`
+    mutation CreateBorad($id: String!) {
+  insert_borad_one(object: {id: $id}) {
+    id
+  }
+}
+    `;
+export type CreateBoradMutationFn = Apollo.MutationFunction<CreateBoradMutation, CreateBoradMutationVariables>;
+
+/**
+ * __useCreateBoradMutation__
+ *
+ * To run a mutation, you first call `useCreateBoradMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateBoradMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createBoradMutation, { data, loading, error }] = useCreateBoradMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCreateBoradMutation(baseOptions?: Apollo.MutationHookOptions<CreateBoradMutation, CreateBoradMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateBoradMutation, CreateBoradMutationVariables>(CreateBoradDocument, options);
+      }
+export type CreateBoradMutationHookResult = ReturnType<typeof useCreateBoradMutation>;
+export type CreateBoradMutationResult = Apollo.MutationResult<CreateBoradMutation>;
+export type CreateBoradMutationOptions = Apollo.BaseMutationOptions<CreateBoradMutation, CreateBoradMutationVariables>;
