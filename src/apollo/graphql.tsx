@@ -459,13 +459,13 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
 
-export type Branistorming_GetBoradQueryVariables = Exact<{
+export type Branistorming_GetBoradSubscriptionVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type Branistorming_GetBoradQuery = (
-  { __typename?: 'query_root' }
+export type Branistorming_GetBoradSubscription = (
+  { __typename?: 'subscription_root' }
   & { borad_by_pk?: Maybe<(
     { __typename?: 'borad' }
     & Pick<Borad, 'id' | 'connect_num' | 'delete_date' | 'delete_flag' | 'created_at' | 'updated_at'>
@@ -474,7 +474,7 @@ export type Branistorming_GetBoradQuery = (
 
 
 export const Branistorming_GetBoradDocument = gql`
-    query Branistorming_GetBorad($id: String!) {
+    subscription Branistorming_GetBorad($id: String!) {
   borad_by_pk(id: $id) {
     id
     connect_num
@@ -487,29 +487,24 @@ export const Branistorming_GetBoradDocument = gql`
     `;
 
 /**
- * __useBranistorming_GetBoradQuery__
+ * __useBranistorming_GetBoradSubscription__
  *
- * To run a query within a React component, call `useBranistorming_GetBoradQuery` and pass it any options that fit your needs.
- * When your component renders, `useBranistorming_GetBoradQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useBranistorming_GetBoradSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useBranistorming_GetBoradSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useBranistorming_GetBoradQuery({
+ * const { data, loading, error } = useBranistorming_GetBoradSubscription({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useBranistorming_GetBoradQuery(baseOptions: Apollo.QueryHookOptions<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>) {
+export function useBranistorming_GetBoradSubscription(baseOptions: Apollo.SubscriptionHookOptions<Branistorming_GetBoradSubscription, Branistorming_GetBoradSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>(Branistorming_GetBoradDocument, options);
+        return Apollo.useSubscription<Branistorming_GetBoradSubscription, Branistorming_GetBoradSubscriptionVariables>(Branistorming_GetBoradDocument, options);
       }
-export function useBranistorming_GetBoradLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>(Branistorming_GetBoradDocument, options);
-        }
-export type Branistorming_GetBoradQueryHookResult = ReturnType<typeof useBranistorming_GetBoradQuery>;
-export type Branistorming_GetBoradLazyQueryHookResult = ReturnType<typeof useBranistorming_GetBoradLazyQuery>;
-export type Branistorming_GetBoradQueryResult = Apollo.QueryResult<Branistorming_GetBoradQuery, Branistorming_GetBoradQueryVariables>;
+export type Branistorming_GetBoradSubscriptionHookResult = ReturnType<typeof useBranistorming_GetBoradSubscription>;
+export type Branistorming_GetBoradSubscriptionResult = Apollo.SubscriptionResult<Branistorming_GetBoradSubscription>;
