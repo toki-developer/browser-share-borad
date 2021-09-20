@@ -88,7 +88,7 @@ gql`
       connect_num
       delete_date
       delete_flag
-      branistorming_opinions(order_by: { disable_flag: asc, created_at: asc }) {
+      branistorming_opinions(order_by: { created_at: asc }) {
         ...Opinions
       }
     }
