@@ -88,7 +88,7 @@ gql`
       connect_num
       delete_date
       delete_flag
-      branistorming_opinions {
+      branistorming_opinions(order_by: { disable_flag: asc, created_at: asc }) {
         ...Opinions
       }
     }
@@ -101,18 +101,7 @@ gql`
     insert_branistorming_opinions_one(
       object: { borad_id: $borad_id, opinio: $opinio, user_id: $user_id }
     ) {
-      id
-      opinio
-      borad_id
-      user_id
+      ...Opinions
     }
   }
 `;
-gql`
-  fragment Opinions on branistorming_opinions {
-    id
-    opinio
-    user_id
-  }
-`;
-// TODO:OpimionListの方でfragmentを定義する
