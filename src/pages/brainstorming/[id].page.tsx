@@ -9,8 +9,10 @@ import {
 import { ErrorMessage } from "src/components/ErrorMessage";
 import { Layout } from "src/layout";
 import { OpinionList } from "src/pages/brainstorming/OpinionList";
+import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
 const OpinionForm: VFC = () => {
+  const interact = useInteractJS();
   const {
     register,
     handleSubmit,
@@ -29,9 +31,14 @@ const OpinionForm: VFC = () => {
     });
     setValue("opinio", "");
   });
+
   return (
-    <div className="fixed top-3 right-3">
-      <div className="border flex flex-col w-52 rounded-sm">
+    <div
+      className="py-6 px-3 w-64 bg-gray-400 rounded-3xl fixed right-0 bottom-"
+      ref={interact.ref}
+      style={{ ...interact.style }}
+    >
+      <div className="border flex flex-col rounded-sm">
         <textarea
           {...register("opinio", {
             required: "入力してください。",
