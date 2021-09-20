@@ -7,7 +7,7 @@ type Props = {
 
 export const Layout: VFC<Props> = (props) => {
   return (
-    <div className={`bg-gray-100 min-h-screen ${!props.fullScreen && "p-4"}`}>
+    <div className={`bg-gray-200 min-h-screen ${!props.fullScreen && "p-4"}`}>
       {props.children}
     </div>
   );
