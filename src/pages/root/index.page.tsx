@@ -1,24 +1,16 @@
 import { gql } from "@apollo/client";
-import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import { LoadingIcon } from "src/components/LoadingIcon";
-import { useCreateBorad } from "src/utils/hooks/useCreateBorad";
+import { Brainstorming } from "src/pages/root/Brainstorming";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
-  const { createBorad } = useCreateBorad();
-  const handleClick = async () => {
-    setIsLoading(true);
-    const id = await createBorad();
-    router.push(`brainstorming/${id}`);
-  };
   if (isLoading) {
     return <LoadingIcon isCenter />;
   }
   return (
     <div>
-      <button onClick={handleClick}>ブレインストーミングを始める</button>
+      <Brainstorming setIsLoading={setIsLoading} />
     </div>
   );
 };
