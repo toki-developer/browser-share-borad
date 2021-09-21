@@ -7,6 +7,7 @@ import {
   useBranistorming_PostOpinionMutation,
 } from "src/apollo/graphql";
 import { ErrorMessage } from "src/components/ErrorMessage";
+import { LoadingIcon } from "src/components/LoadingIcon";
 import { Layout } from "src/layout";
 import { OpinionList } from "src/pages/brainstorming/OpinionList";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
@@ -69,7 +70,7 @@ const BrainstormingPage = () => {
   });
   if (error) return <div>error</div>;
   if (!data?.borad_by_pk) {
-    return <div>loading...</div>;
+    return <LoadingIcon isCenter />;
   }
   return (
     <Layout>
