@@ -14,6 +14,7 @@ type ActionButton = {
   isDisable: boolean;
   isEdit: boolean;
   setIsEdit: (v: boolean) => void;
+  handleCancelEdit: () => void;
 };
 
 type OptionItem = {
@@ -31,6 +32,10 @@ const ActionButton: VFC<ActionButton> = (props) => {
     props.setIsEdit(true);
   };
   const handleDisable = () => {
+    if (props.isEdit) {
+      props.handleCancelEdit();
+      return;
+    }
     disableOpinion({ variables: { id: props.id } });
   };
   const handleEnable = () => {
@@ -107,6 +112,7 @@ const OptionItem: VFC<OptionItem> = (props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<{ opinio: string }>();
   const [updateOpinion] = useBranistorming_UpdateOpinionMutation();
@@ -118,6 +124,10 @@ const OptionItem: VFC<OptionItem> = (props) => {
     }
     setIsEdit(false);
   });
+  const onHandleCancelEdit = () => {
+    setValue("opinio", props.item.opinio);
+    setIsEdit(false);
+  };
   const isDisable = props.item.disable_flag == 1;
   return (
     <div
@@ -133,6 +143,7 @@ const OptionItem: VFC<OptionItem> = (props) => {
           isDisable={isDisable}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
+          handleCancelEdit={onHandleCancelEdit}
         />
       </div>
 
