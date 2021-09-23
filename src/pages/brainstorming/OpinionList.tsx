@@ -7,6 +7,7 @@ import { useBranistorming_EnableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_DisableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_UpdateOpinionMutation } from "src/apollo/graphql";
 import { ErrorMessage } from "src/components/ErrorMessage";
+import { LoadingIcon } from "src/components/LoadingIcon";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
 type ActionButton = {
@@ -15,6 +16,7 @@ type ActionButton = {
   isEdit: boolean;
   setIsEdit: (v: boolean) => void;
   handleCancelEdit: () => void;
+  setIsLoading: (v: boolean) => void;
 };
 
 type OptionItem = {
@@ -31,12 +33,14 @@ const ActionButton: VFC<ActionButton> = (props) => {
   const handleEdit = () => {
     props.setIsEdit(true);
   };
-  const handleDisable = () => {
+  const handleDisable = async () => {
     if (props.isEdit) {
       props.handleCancelEdit();
       return;
     }
-    disableOpinion({ variables: { id: props.id } });
+    props.setIsLoading(true);
+    await disableOpinion({ variables: { id: props.id } });
+    props.setIsLoading(false);
   };
   const handleEnable = () => {
     enableOpinion({ variables: { id: props.id } });
@@ -108,6 +112,7 @@ const ActionButton: VFC<ActionButton> = (props) => {
 
 const OptionItem: VFC<OptionItem> = (props) => {
   const interact = useInteractJS();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const {
     register,
@@ -118,11 +123,13 @@ const OptionItem: VFC<OptionItem> = (props) => {
   const [updateOpinion] = useBranistorming_UpdateOpinionMutation();
   const handleEdited = handleSubmit(async (data) => {
     if (props.item.opinio !== data.opinio) {
+      setIsLoading(true);
       await updateOpinion({
         variables: { id: props.item.id, opinio: data.opinio },
       });
     }
     setIsEdit(false);
+    setIsLoading(false);
   });
   const onHandleCancelEdit = () => {
     setValue("opinio", props.item.opinio);
@@ -137,41 +144,55 @@ const OptionItem: VFC<OptionItem> = (props) => {
       ref={interact.ref}
       style={{ ...interact.style }}
     >
-      <div className="absolute top-0 right-0 flex items-center">
-        <ActionButton
-          id={props.item.id}
-          isDisable={isDisable}
-          isEdit={isEdit}
-          setIsEdit={setIsEdit}
-          handleCancelEdit={onHandleCancelEdit}
-        />
-      </div>
-
-      {isEdit ? (
-        <div className="text-right">
-          <textarea
-            {...register("opinio", {
-              required: "入力してください。",
-              maxLength: {
-                value: 100,
-                message: "100文字以下で入力してください",
-              },
-            })}
-            defaultValue={props.item.opinio}
-            className="focus:outline-none w-full "
-          />
-          <button
-            className="text-xs bg-blue-600 rounded-xl text-white py-1 px-2"
-            onClick={handleEdited}
-          >
-            編集終了
-          </button>
-          {errors.opinio?.message && (
-            <ErrorMessage message={errors.opinio.message} className="mt-1" />
-          )}
+      {isLoading ? (
+        <div className="text-center">
+          <LoadingIcon isSmall />
         </div>
       ) : (
-        <p className={isDisable ? "text-gray-400" : ""}>{props.item.opinio}</p>
+        <div>
+          <div className="absolute top-0 right-0 flex items-center">
+            <ActionButton
+              id={props.item.id}
+              isDisable={isDisable}
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
+              handleCancelEdit={onHandleCancelEdit}
+              setIsLoading={setIsLoading}
+            />
+          </div>
+
+          {isEdit ? (
+            <div className="text-right">
+              <textarea
+                {...register("opinio", {
+                  required: "入力してください。",
+                  maxLength: {
+                    value: 100,
+                    message: "100文字以下で入力してください",
+                  },
+                })}
+                defaultValue={props.item.opinio}
+                className="focus:outline-none w-full "
+              />
+              <button
+                className="text-xs bg-blue-600 rounded-xl text-white py-1 px-2"
+                onClick={handleEdited}
+              >
+                編集終了
+              </button>
+              {errors.opinio?.message && (
+                <ErrorMessage
+                  message={errors.opinio.message}
+                  className="mt-1"
+                />
+              )}
+            </div>
+          ) : (
+            <p className={isDisable ? "text-gray-400" : ""}>
+              {props.item.opinio}
+            </p>
+          )}
+        </div>
       )}
     </div>
   );
