@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import type { VFC } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { OpinionsFragment } from "src/apollo/graphql";
@@ -8,6 +9,7 @@ import { useBranistorming_DisableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_UpdateOpinionMutation } from "src/apollo/graphql";
 import { ErrorMessage } from "src/components/ErrorMessage";
 import { LoadingIcon } from "src/components/LoadingIcon";
+import type { OpinionForm } from "src/pages/brainstorming/[id].page";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
 type ActionButton = {
@@ -15,8 +17,8 @@ type ActionButton = {
   isDisable: boolean;
   isEdit: boolean;
   setIsEdit: (v: boolean) => void;
+  setIsDisable: (v: boolean) => void;
   handleCancelEdit: () => void;
-  setIsLoading: (v: boolean) => void;
 };
 
 type OptionItem = {
@@ -33,16 +35,16 @@ const ActionButton: VFC<ActionButton> = (props) => {
   const handleEdit = () => {
     props.setIsEdit(true);
   };
-  const handleDisable = async () => {
+  const handleDisable = () => {
     if (props.isEdit) {
       props.handleCancelEdit();
       return;
     }
-    props.setIsLoading(true);
-    await disableOpinion({ variables: { id: props.id } });
-    props.setIsLoading(false);
+    props.setIsDisable(true);
+    disableOpinion({ variables: { id: props.id } });
   };
   const handleEnable = () => {
+    props.setIsDisable(false);
     enableOpinion({ variables: { id: props.id } });
   };
   if (props.isDisable)
@@ -112,30 +114,37 @@ const ActionButton: VFC<ActionButton> = (props) => {
 
 const OptionItem: VFC<OptionItem> = (props) => {
   const interact = useInteractJS();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [opinion, setOpinion] = useState<string>(props.item.opinion);
+  const [isDisable, setIsDisable] = useState<boolean>(
+    props.item.disable_flag == 1
+  );
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<{ opinio: string }>();
+  } = useForm<OpinionForm>();
   const [updateOpinion] = useBranistorming_UpdateOpinionMutation();
-  const handleEdited = handleSubmit(async (data) => {
-    if (props.item.opinio !== data.opinio) {
-      setIsLoading(true);
-      await updateOpinion({
-        variables: { id: props.item.id, opinio: data.opinio },
+  const handleEdited = handleSubmit((data) => {
+    if (opinion !== data.opinion) {
+      setOpinion(data.opinion);
+      updateOpinion({
+        variables: { id: props.item.id, opinion: data.opinion },
       });
     }
     setIsEdit(false);
-    setIsLoading(false);
   });
   const onHandleCancelEdit = () => {
-    setValue("opinio", props.item.opinio);
+    setValue("opinion", opinion);
     setIsEdit(false);
   };
-  const isDisable = props.item.disable_flag == 1;
+  useEffect(() => {
+    setOpinion(props.item.opinion);
+  }, [props.item.opinion]);
+  useEffect(() => {
+    setIsDisable(props.item.disable_flag == 1);
+  }, [props.item.disable_flag]);
   return (
     <div
       className={`border inline-block w-52 p-2 pt-4 shadow-sm rounded-sm text-left relative ml-2 mt-2 group ${
@@ -144,7 +153,7 @@ const OptionItem: VFC<OptionItem> = (props) => {
       ref={interact.ref}
       style={{ ...interact.style }}
     >
-      {isLoading ? (
+      {opinion == "a" ? (
         <div className="text-center">
           <LoadingIcon isSmall />
         </div>
@@ -156,22 +165,22 @@ const OptionItem: VFC<OptionItem> = (props) => {
               isDisable={isDisable}
               isEdit={isEdit}
               setIsEdit={setIsEdit}
+              setIsDisable={setIsDisable}
               handleCancelEdit={onHandleCancelEdit}
-              setIsLoading={setIsLoading}
             />
           </div>
 
           {isEdit ? (
             <div className="text-right">
               <textarea
-                {...register("opinio", {
+                {...register("opinion", {
                   required: "入力してください。",
                   maxLength: {
                     value: 100,
                     message: "100文字以下で入力してください",
                   },
                 })}
-                defaultValue={props.item.opinio}
+                defaultValue={opinion}
                 className="focus:outline-none w-full "
               />
               <button
@@ -180,17 +189,15 @@ const OptionItem: VFC<OptionItem> = (props) => {
               >
                 編集終了
               </button>
-              {errors.opinio?.message && (
+              {errors.opinion?.message && (
                 <ErrorMessage
-                  message={errors.opinio.message}
+                  message={errors.opinion.message}
                   className="mt-1"
                 />
               )}
             </div>
           ) : (
-            <p className={isDisable ? "text-gray-400" : ""}>
-              {props.item.opinio}
-            </p>
+            <p className={isDisable ? "text-gray-400" : ""}>{opinion}</p>
           )}
         </div>
       )}
@@ -211,17 +218,17 @@ export const OpinionList: VFC<Props> = (props) => {
 gql`
   fragment Opinions on branistorming_opinions {
     id
-    opinio
+    opinion
     user_id
     disable_flag
   }
 `;
 
 gql`
-  mutation Branistorming_UpdateOpinion($id: uuid!, $opinio: String!) {
+  mutation Branistorming_UpdateOpinion($id: uuid!, $opinion: String!) {
     update_branistorming_opinions_by_pk(
       pk_columns: { id: $id }
-      _set: { opinio: $opinio }
+      _set: { opinion: $opinion }
     ) {
       ...Opinions
     }
@@ -244,3 +251,5 @@ gql`
     }
   }
 `;
+
+// TODO:複数回処理に対応、通信中クリック、同時クリック...

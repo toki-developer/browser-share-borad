@@ -345,7 +345,7 @@ export type Branistorming_Opinions = {
   created_at: Scalars['timestamptz'];
   disable_flag?: Maybe<Scalars['Int']>;
   id: Scalars['uuid'];
-  opinio: Scalars['String'];
+  opinion: Scalars['String'];
   updated_at: Scalars['timestamptz'];
   user_id: Scalars['String'];
 };
@@ -423,7 +423,7 @@ export type Branistorming_Opinions_Bool_Exp = {
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   disable_flag?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
-  opinio?: Maybe<String_Comparison_Exp>;
+  opinion?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
@@ -446,7 +446,7 @@ export type Branistorming_Opinions_Insert_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
-  opinio?: Maybe<Scalars['String']>;
+  opinion?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -458,7 +458,7 @@ export type Branistorming_Opinions_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
-  opinio?: Maybe<Scalars['String']>;
+  opinion?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -469,7 +469,7 @@ export type Branistorming_Opinions_Max_Order_By = {
   created_at?: Maybe<Order_By>;
   disable_flag?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  opinio?: Maybe<Order_By>;
+  opinion?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -481,7 +481,7 @@ export type Branistorming_Opinions_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
-  opinio?: Maybe<Scalars['String']>;
+  opinion?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -492,7 +492,7 @@ export type Branistorming_Opinions_Min_Order_By = {
   created_at?: Maybe<Order_By>;
   disable_flag?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  opinio?: Maybe<Order_By>;
+  opinion?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -520,7 +520,7 @@ export type Branistorming_Opinions_Order_By = {
   created_at?: Maybe<Order_By>;
   disable_flag?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  opinio?: Maybe<Order_By>;
+  opinion?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -541,7 +541,7 @@ export enum Branistorming_Opinions_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Opinio = 'opinio',
+  Opinion = 'opinion',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -554,7 +554,7 @@ export type Branistorming_Opinions_Set_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
-  opinio?: Maybe<Scalars['String']>;
+  opinion?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -614,7 +614,7 @@ export enum Branistorming_Opinions_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Opinio = 'opinio',
+  Opinion = 'opinion',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -951,12 +951,12 @@ export type Uuid_Comparison_Exp = {
 
 export type OpinionsFragment = (
   { __typename?: 'branistorming_opinions' }
-  & Pick<Branistorming_Opinions, 'id' | 'opinio' | 'user_id' | 'disable_flag'>
+  & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
 );
 
 export type Branistorming_UpdateOpinionMutationVariables = Exact<{
   id: Scalars['uuid'];
-  opinio: Scalars['String'];
+  opinion: Scalars['String'];
 }>;
 
 
@@ -964,7 +964,7 @@ export type Branistorming_UpdateOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinio' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
   )> }
 );
 
@@ -977,7 +977,7 @@ export type Branistorming_DisableOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinio' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
   )> }
 );
 
@@ -990,7 +990,7 @@ export type Branistorming_EnableOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinio' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
   )> }
 );
 
@@ -1006,7 +1006,7 @@ export type Branistorming_GetBoradSubscription = (
     & Pick<Borad, 'id' | 'connect_num' | 'delete_date' | 'delete_flag' | 'brainstorming_theme'>
     & { branistorming_opinions: Array<(
       { __typename?: 'branistorming_opinions' }
-      & Pick<Branistorming_Opinions, 'id' | 'opinio' | 'user_id' | 'disable_flag'>
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
     )> }
   )> }
 );
@@ -1027,7 +1027,7 @@ export type Brainstorming_PostThemeMutation = (
 
 export type Branistorming_PostOpinionMutationVariables = Exact<{
   borad_id: Scalars['String'];
-  opinio: Scalars['String'];
+  opinion: Scalars['String'];
   user_id: Scalars['String'];
 }>;
 
@@ -1036,7 +1036,7 @@ export type Branistorming_PostOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { insert_branistorming_opinions_one?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinio' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
   )> }
 );
 
@@ -1056,16 +1056,16 @@ export type CreateBoradMutation = (
 export const OpinionsFragmentDoc = gql`
     fragment Opinions on branistorming_opinions {
   id
-  opinio
+  opinion
   user_id
   disable_flag
 }
     `;
 export const Branistorming_UpdateOpinionDocument = gql`
-    mutation Branistorming_UpdateOpinion($id: uuid!, $opinio: String!) {
+    mutation Branistorming_UpdateOpinion($id: uuid!, $opinion: String!) {
   update_branistorming_opinions_by_pk(
     pk_columns: {id: $id}
-    _set: {opinio: $opinio}
+    _set: {opinion: $opinion}
   ) {
     ...Opinions
   }
@@ -1087,7 +1087,7 @@ export type Branistorming_UpdateOpinionMutationFn = Apollo.MutationFunction<Bran
  * const [branistormingUpdateOpinionMutation, { data, loading, error }] = useBranistorming_UpdateOpinionMutation({
  *   variables: {
  *      id: // value for 'id'
- *      opinio: // value for 'opinio'
+ *      opinion: // value for 'opinion'
  *   },
  * });
  */
@@ -1245,9 +1245,9 @@ export type Brainstorming_PostThemeMutationHookResult = ReturnType<typeof useBra
 export type Brainstorming_PostThemeMutationResult = Apollo.MutationResult<Brainstorming_PostThemeMutation>;
 export type Brainstorming_PostThemeMutationOptions = Apollo.BaseMutationOptions<Brainstorming_PostThemeMutation, Brainstorming_PostThemeMutationVariables>;
 export const Branistorming_PostOpinionDocument = gql`
-    mutation Branistorming_PostOpinion($borad_id: String!, $opinio: String!, $user_id: String!) {
+    mutation Branistorming_PostOpinion($borad_id: String!, $opinion: String!, $user_id: String!) {
   insert_branistorming_opinions_one(
-    object: {borad_id: $borad_id, opinio: $opinio, user_id: $user_id}
+    object: {borad_id: $borad_id, opinion: $opinion, user_id: $user_id}
   ) {
     ...Opinions
   }
@@ -1269,7 +1269,7 @@ export type Branistorming_PostOpinionMutationFn = Apollo.MutationFunction<Branis
  * const [branistormingPostOpinionMutation, { data, loading, error }] = useBranistorming_PostOpinionMutation({
  *   variables: {
  *      borad_id: // value for 'borad_id'
- *      opinio: // value for 'opinio'
+ *      opinion: // value for 'opinion'
  *      user_id: // value for 'user_id'
  *   },
  * });

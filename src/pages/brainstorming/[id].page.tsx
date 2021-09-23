@@ -3,6 +3,7 @@ import { useRouter } from "next/dist/client/router";
 import type { VFC } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import type { OpinionsFragment } from "src/apollo/graphql";
 import {
   useBrainstorming_PostThemeMutation,
   useBranistorming_GetBoradSubscription,
@@ -14,6 +15,8 @@ import { Layout } from "src/layout";
 import { OpinionList } from "src/pages/brainstorming/OpinionList";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
+export type OpinionForm = Pick<OpinionsFragment, "opinion">;
+
 const OpinionForm: VFC = () => {
   const interact = useInteractJS();
   const {
@@ -21,18 +24,18 @@ const OpinionForm: VFC = () => {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<{ opinio: string }>();
+  } = useForm<OpinionForm>();
   const router = useRouter();
   const [postOpinion] = useBranistorming_PostOpinionMutation();
   const handlePostOpinion = handleSubmit((data) => {
     postOpinion({
       variables: {
         borad_id: (router.query.id as string) ?? "",
-        opinio: data.opinio,
+        opinion: data.opinion,
         user_id: "1",
       },
     });
-    setValue("opinio", "");
+    setValue("opinion", "");
   });
 
   return (
@@ -43,7 +46,7 @@ const OpinionForm: VFC = () => {
     >
       <div className="border flex flex-col rounded-sm">
         <textarea
-          {...register("opinio", {
+          {...register("opinion", {
             required: "入力してください。",
             maxLength: { value: 100, message: "100文字以下で入力してください" },
           })}
@@ -58,8 +61,8 @@ const OpinionForm: VFC = () => {
           投稿する
         </button>
       </div>
-      {errors.opinio?.message && (
-        <ErrorMessage message={errors.opinio.message} className="mt-1" />
+      {errors.opinion?.message && (
+        <ErrorMessage message={errors.opinion.message} className="mt-1" />
       )}
     </div>
   );
@@ -161,11 +164,11 @@ gql`
   }
   mutation Branistorming_PostOpinion(
     $borad_id: String!
-    $opinio: String!
+    $opinion: String!
     $user_id: String!
   ) {
     insert_branistorming_opinions_one(
-      object: { borad_id: $borad_id, opinio: $opinio, user_id: $user_id }
+      object: { borad_id: $borad_id, opinion: $opinion, user_id: $user_id }
     ) {
       ...Opinions
     }
