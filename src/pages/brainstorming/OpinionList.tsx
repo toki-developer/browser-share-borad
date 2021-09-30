@@ -9,7 +9,7 @@ import { useBranistorming_DisableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_UpdateOpinionMutation } from "src/apollo/graphql";
 import { ErrorMessage } from "src/components/ErrorMessage";
 import { LoadingIcon } from "src/components/LoadingIcon";
-import type { OpinionForm } from "src/pages/brainstorming/[id].page";
+import type { OpinionForm } from "src/pages/brainstorming/OpinionForm";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
 type ActionButton = {
