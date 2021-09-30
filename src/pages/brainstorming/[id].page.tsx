@@ -9,6 +9,7 @@ import {
 import { ErrorMessage } from "src/components/ErrorMessage";
 import { LoadingIcon } from "src/components/LoadingIcon";
 import { Layout } from "src/layout";
+import { DeleteButton } from "src/pages/brainstorming/DeleteButton";
 import { OpinionForm } from "src/pages/brainstorming/OpinionForm";
 import { OpinionList } from "src/pages/brainstorming/OpinionList";
 
@@ -76,6 +77,7 @@ const BrainstormingPage = () => {
       )}
       <OpinionList opinionList={data.borad_by_pk?.branistorming_opinions} />
       <OpinionForm />
+      <DeleteButton />
     </Layout>
   );
 };

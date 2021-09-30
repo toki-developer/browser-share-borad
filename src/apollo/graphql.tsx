@@ -949,6 +949,38 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
+export type Branistorming_DeleteAllOpinionMutationVariables = Exact<{
+  borad_id: Scalars['String'];
+}>;
+
+
+export type Branistorming_DeleteAllOpinionMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_branistorming_opinions?: Maybe<(
+    { __typename?: 'branistorming_opinions_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'branistorming_opinions' }
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+    )> }
+  )> }
+);
+
+export type Branistorming_DeleteDisableOpinionMutationVariables = Exact<{
+  borad_id: Scalars['String'];
+}>;
+
+
+export type Branistorming_DeleteDisableOpinionMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_branistorming_opinions?: Maybe<(
+    { __typename?: 'branistorming_opinions_mutation_response' }
+    & { returning: Array<(
+      { __typename?: 'branistorming_opinions' }
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+    )> }
+  )> }
+);
+
 export type Branistorming_PostOpinionMutationVariables = Exact<{
   borad_id: Scalars['String'];
   opinion: Scalars['String'];
@@ -1061,6 +1093,78 @@ export const OpinionsFragmentDoc = gql`
   disable_flag
 }
     `;
+export const Branistorming_DeleteAllOpinionDocument = gql`
+    mutation Branistorming_DeleteAllOpinion($borad_id: String!) {
+  delete_branistorming_opinions(where: {borad_id: {_eq: $borad_id}}) {
+    returning {
+      ...Opinions
+    }
+  }
+}
+    ${OpinionsFragmentDoc}`;
+export type Branistorming_DeleteAllOpinionMutationFn = Apollo.MutationFunction<Branistorming_DeleteAllOpinionMutation, Branistorming_DeleteAllOpinionMutationVariables>;
+
+/**
+ * __useBranistorming_DeleteAllOpinionMutation__
+ *
+ * To run a mutation, you first call `useBranistorming_DeleteAllOpinionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useBranistorming_DeleteAllOpinionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [branistormingDeleteAllOpinionMutation, { data, loading, error }] = useBranistorming_DeleteAllOpinionMutation({
+ *   variables: {
+ *      borad_id: // value for 'borad_id'
+ *   },
+ * });
+ */
+export function useBranistorming_DeleteAllOpinionMutation(baseOptions?: Apollo.MutationHookOptions<Branistorming_DeleteAllOpinionMutation, Branistorming_DeleteAllOpinionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Branistorming_DeleteAllOpinionMutation, Branistorming_DeleteAllOpinionMutationVariables>(Branistorming_DeleteAllOpinionDocument, options);
+      }
+export type Branistorming_DeleteAllOpinionMutationHookResult = ReturnType<typeof useBranistorming_DeleteAllOpinionMutation>;
+export type Branistorming_DeleteAllOpinionMutationResult = Apollo.MutationResult<Branistorming_DeleteAllOpinionMutation>;
+export type Branistorming_DeleteAllOpinionMutationOptions = Apollo.BaseMutationOptions<Branistorming_DeleteAllOpinionMutation, Branistorming_DeleteAllOpinionMutationVariables>;
+export const Branistorming_DeleteDisableOpinionDocument = gql`
+    mutation Branistorming_DeleteDisableOpinion($borad_id: String!) {
+  delete_branistorming_opinions(
+    where: {borad_id: {_eq: $borad_id}, disable_flag: {_eq: 1}}
+  ) {
+    returning {
+      ...Opinions
+    }
+  }
+}
+    ${OpinionsFragmentDoc}`;
+export type Branistorming_DeleteDisableOpinionMutationFn = Apollo.MutationFunction<Branistorming_DeleteDisableOpinionMutation, Branistorming_DeleteDisableOpinionMutationVariables>;
+
+/**
+ * __useBranistorming_DeleteDisableOpinionMutation__
+ *
+ * To run a mutation, you first call `useBranistorming_DeleteDisableOpinionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useBranistorming_DeleteDisableOpinionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [branistormingDeleteDisableOpinionMutation, { data, loading, error }] = useBranistorming_DeleteDisableOpinionMutation({
+ *   variables: {
+ *      borad_id: // value for 'borad_id'
+ *   },
+ * });
+ */
+export function useBranistorming_DeleteDisableOpinionMutation(baseOptions?: Apollo.MutationHookOptions<Branistorming_DeleteDisableOpinionMutation, Branistorming_DeleteDisableOpinionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Branistorming_DeleteDisableOpinionMutation, Branistorming_DeleteDisableOpinionMutationVariables>(Branistorming_DeleteDisableOpinionDocument, options);
+      }
+export type Branistorming_DeleteDisableOpinionMutationHookResult = ReturnType<typeof useBranistorming_DeleteDisableOpinionMutation>;
+export type Branistorming_DeleteDisableOpinionMutationResult = Apollo.MutationResult<Branistorming_DeleteDisableOpinionMutation>;
+export type Branistorming_DeleteDisableOpinionMutationOptions = Apollo.BaseMutationOptions<Branistorming_DeleteDisableOpinionMutation, Branistorming_DeleteDisableOpinionMutationVariables>;
 export const Branistorming_PostOpinionDocument = gql`
     mutation Branistorming_PostOpinion($borad_id: String!, $opinion: String!, $user_id: String!) {
   insert_branistorming_opinions_one(

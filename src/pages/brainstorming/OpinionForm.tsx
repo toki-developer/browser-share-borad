@@ -32,7 +32,7 @@ export const OpinionForm: VFC = () => {
 
   return (
     <div
-      className="py-6 px-3 w-64 bg-gray-400 rounded-3xl fixed right-0 bottom-"
+      className="py-6 px-3 w-64 bg-gray-400 rounded-3xl fixed right-0 bottom-28"
       ref={interact.ref}
       style={{ ...interact.style }}
     >
