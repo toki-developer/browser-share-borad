@@ -6,8 +6,8 @@ import {
   useBrainstorming_PostThemeMutation,
   useBranistorming_GetBoradSubscription,
 } from "src/apollo/graphql";
-import { ErrorMessage } from "src/components/ErrorMessage";
-import { LoadingIcon } from "src/components/LoadingIcon";
+import { ErrorMessage } from "src/components/Error";
+import { LoadingIcon } from "src/components/Loading";
 import { Layout } from "src/layout";
 import { DeleteButton } from "src/pages/brainstorming/DeleteButton";
 import { OpinionForm } from "src/pages/brainstorming/OpinionForm";

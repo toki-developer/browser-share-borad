@@ -7,8 +7,8 @@ import type { OpinionsFragment } from "src/apollo/graphql";
 import { useBranistorming_EnableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_DisableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_UpdateOpinionMutation } from "src/apollo/graphql";
-import { ErrorMessage } from "src/components/ErrorMessage";
-import { LoadingIcon } from "src/components/LoadingIcon";
+import { ErrorMessage } from "src/components/Error";
+import { LoadingIcon } from "src/components/Loading";
 import type { OpinionForm } from "src/pages/brainstorming/OpinionForm";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 

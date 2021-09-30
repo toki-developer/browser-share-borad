@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useState } from "react";
-import { LoadingIcon } from "src/components/LoadingIcon";
+import { LoadingIcon } from "src/components/Loading";
 import { Brainstorming } from "src/pages/root/Brainstorming";
 
 const Home = () => {

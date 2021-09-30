@@ -4,7 +4,7 @@ import type { VFC } from "react";
 import { useForm } from "react-hook-form";
 import type { OpinionsFragment } from "src/apollo/graphql";
 import { useBranistorming_PostOpinionMutation } from "src/apollo/graphql";
-import { ErrorMessage } from "src/components/ErrorMessage";
+import { ErrorMessage } from "src/components/Error";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
 export type OpinionForm = Pick<OpinionsFragment, "opinion">;
