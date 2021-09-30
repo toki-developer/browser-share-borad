@@ -960,7 +960,7 @@ export type Branistorming_DeleteAllOpinionMutation = (
     { __typename?: 'branistorming_opinions_mutation_response' }
     & { returning: Array<(
       { __typename?: 'branistorming_opinions' }
-      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
     )> }
   )> }
 );
@@ -976,7 +976,7 @@ export type Branistorming_DeleteDisableOpinionMutation = (
     { __typename?: 'branistorming_opinions_mutation_response' }
     & { returning: Array<(
       { __typename?: 'branistorming_opinions' }
-      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
     )> }
   )> }
 );
@@ -992,13 +992,13 @@ export type Branistorming_PostOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { insert_branistorming_opinions_one?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
   )> }
 );
 
 export type OpinionsFragment = (
   { __typename?: 'branistorming_opinions' }
-  & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+  & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
 );
 
 export type Branistorming_UpdateOpinionMutationVariables = Exact<{
@@ -1011,7 +1011,7 @@ export type Branistorming_UpdateOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
   )> }
 );
 
@@ -1024,7 +1024,7 @@ export type Branistorming_DisableOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
   )> }
 );
 
@@ -1037,7 +1037,7 @@ export type Branistorming_EnableOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
   )> }
 );
 
@@ -1053,7 +1053,7 @@ export type Branistorming_GetBoradSubscription = (
     & Pick<Borad, 'id' | 'connect_num' | 'delete_date' | 'delete_flag' | 'brainstorming_theme'>
     & { branistorming_opinions: Array<(
       { __typename?: 'branistorming_opinions' }
-      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'user_id' | 'disable_flag'>
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
     )> }
   )> }
 );
@@ -1089,7 +1089,6 @@ export const OpinionsFragmentDoc = gql`
     fragment Opinions on branistorming_opinions {
   id
   opinion
-  user_id
   disable_flag
 }
     `;

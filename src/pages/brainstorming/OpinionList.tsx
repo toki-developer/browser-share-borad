@@ -219,7 +219,6 @@ gql`
   fragment Opinions on branistorming_opinions {
     id
     opinion
-    user_id
     disable_flag
   }
 `;
