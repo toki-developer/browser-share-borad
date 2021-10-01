@@ -35,3 +35,4 @@ https://browser-share-board.vercel.app/
 ### fix
 
 - アイテムの高さが全て同じになる
+- エラー処理
