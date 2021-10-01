@@ -7,9 +7,8 @@ import type { OpinionsFragment } from "src/apollo/graphql";
 import { useBranistorming_EnableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_DisableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_UpdateOpinionMutation } from "src/apollo/graphql";
-import { ErrorMessage } from "src/components/ErrorMessage";
-import { LoadingIcon } from "src/components/LoadingIcon";
-import type { OpinionForm } from "src/pages/brainstorming/[id].page";
+import { ErrorMessage } from "src/components/Error";
+import type { OpinionForm } from "src/pages/brainstorming/OpinionForm";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
 type ActionButton = {
@@ -153,54 +152,45 @@ const OptionItem: VFC<OptionItem> = (props) => {
       ref={interact.ref}
       style={{ ...interact.style }}
     >
-      {opinion == "a" ? (
-        <div className="text-center">
-          <LoadingIcon isSmall />
+      <div>
+        <div className="absolute top-0 right-0 flex items-center">
+          <ActionButton
+            id={props.item.id}
+            isDisable={isDisable}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+            setIsDisable={setIsDisable}
+            handleCancelEdit={onHandleCancelEdit}
+          />
         </div>
-      ) : (
-        <div>
-          <div className="absolute top-0 right-0 flex items-center">
-            <ActionButton
-              id={props.item.id}
-              isDisable={isDisable}
-              isEdit={isEdit}
-              setIsEdit={setIsEdit}
-              setIsDisable={setIsDisable}
-              handleCancelEdit={onHandleCancelEdit}
-            />
-          </div>
 
-          {isEdit ? (
-            <div className="text-right">
-              <textarea
-                {...register("opinion", {
-                  required: "入力してください。",
-                  maxLength: {
-                    value: 100,
-                    message: "100文字以下で入力してください",
-                  },
-                })}
-                defaultValue={opinion}
-                className="focus:outline-none w-full "
-              />
-              <button
-                className="text-xs bg-blue-600 rounded-xl text-white py-1 px-2"
-                onClick={handleEdited}
-              >
-                編集終了
-              </button>
-              {errors.opinion?.message && (
-                <ErrorMessage
-                  message={errors.opinion.message}
-                  className="mt-1"
-                />
-              )}
-            </div>
-          ) : (
-            <p className={isDisable ? "text-gray-400" : ""}>{opinion}</p>
-          )}
-        </div>
-      )}
+        {isEdit ? (
+          <div className="text-right">
+            <textarea
+              {...register("opinion", {
+                required: "入力してください。",
+                maxLength: {
+                  value: 100,
+                  message: "100文字以下で入力してください",
+                },
+              })}
+              defaultValue={opinion}
+              className="focus:outline-none w-full "
+            />
+            <button
+              className="text-xs bg-blue-600 rounded-xl text-white py-1 px-2"
+              onClick={handleEdited}
+            >
+              編集終了
+            </button>
+            {errors.opinion?.message && (
+              <ErrorMessage message={errors.opinion.message} className="mt-1" />
+            )}
+          </div>
+        ) : (
+          <p className={isDisable ? "text-gray-400" : ""}>{opinion}</p>
+        )}
+      </div>
     </div>
   );
 };
@@ -219,7 +209,6 @@ gql`
   fragment Opinions on branistorming_opinions {
     id
     opinion
-    user_id
     disable_flag
   }
 `;

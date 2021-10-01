@@ -35,13 +35,12 @@ export const useInteractJS = (
       });
   };
 
-  const disable = () => {
-    interact(interactRef.current as unknown as HTMLElement).unset();
-  };
+  // const disable = () => {
+  //   interact(interactRef.current as unknown as HTMLElement).unset();
+  // };
 
   useEffect(() => {
     if (interactRef.current) enable();
-    return disable;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
