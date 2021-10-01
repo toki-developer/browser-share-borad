@@ -34,10 +34,16 @@ export const DeleteButton = () => {
   return (
     <>
       <div className="py-4 px-6 bg-gray-300 rounded-3xl fixed right-8 bottom-8">
-        <button onClick={handleShowDeleteDisableDialog} className="">
+        <button
+          onClick={handleShowDeleteDisableDialog}
+          className="hover:text-blue-500 font-bold border-b-2 hover:border-blue-500 border-gray-300"
+        >
           削除済みアイテムをボードから取り除く
         </button>
-        <button onClick={handleShowDeleteAllDialog} className="ml-6">
+        <button
+          onClick={handleShowDeleteAllDialog}
+          className="ml-6 hover:text-blue-500 font-bold border-b-2 hover:border-blue-500 border-gray-300"
+        >
           ボード上のアイテムを全て取り除く
         </button>
       </div>
