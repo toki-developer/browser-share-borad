@@ -20,33 +20,23 @@ export const Brainstorming: VFC<Props> = (props) => {
   };
   return (
     <div>
-      <div className="bg-blue-600 h-96 flex items-center justify-around ">
-        <h2 className="text-white text-3xl font-bold">
-          <span className="text-5xl text-shadow-black-5">
-            ブレインストーミング
-          </span>
-          を始める
-        </h2>
-        <button
-          className="py-1 px-10 rounded-full text-2xl shadow-xl font-bold bg-white flex items-center hover:shadow-none hover:text-gray-600"
-          onClick={handleClick}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mr-1 inline-block"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <div className="flex">
+        <div className="flex-1 pl-20 text-gray-700 bg-blue-50">
+          <h2 className="text-5xl font-bold mt-36">ブレインストーミング</h2>
+          <p className="text-lg mt-12 font-semibold mb-36">
+            ログイン不要。URL共有のみでブレインストーミング。
+            <br />
+            zoomでの軽い意見だしやアイスブレイクなどにご利用できます。
+          </p>
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <button
+            className="py-2 px-16 rounded-md text-2xl shadow-xl text-white bg-blue-500 flex items-center hover:shadow-none hover:text-gray-200"
+            onClick={handleClick}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-          START
-        </button>
+            はじめる
+          </button>
+        </div>
       </div>
       <Usage />
     </div>
