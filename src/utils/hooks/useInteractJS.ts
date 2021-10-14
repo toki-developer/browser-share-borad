@@ -1,25 +1,23 @@
 import interact from "interactjs";
 import { useEffect, useRef, useState } from "react";
 
-type Partial<T> = {
-  [P in keyof T]?: T[P];
+type InteractType = {
+  position?: {
+    x: number;
+    y: number;
+  };
+  fn?: (x: number, y: number) => void;
 };
 
-const initPosition = {
-  x: 0,
-  y: 0,
-};
-
-export const useInteractJS = (
-  position: Partial<typeof initPosition> = initPosition
-) => {
+export const useInteractJS = ({
+  position = { x: 0, y: 0 },
+  fn,
+}: InteractType) => {
   const [_position, setPosition] = useState({
-    ...initPosition,
     ...position,
   });
   const interactRef = useRef(null);
   let { x, y } = _position;
-
   const enable = () => {
     interact(interactRef.current as unknown as HTMLElement)
       .draggable({
@@ -32,18 +30,18 @@ export const useInteractJS = (
           x,
           y,
         });
+      })
+      .on("dragend", () => {
+        if (fn) fn(x, y);
       });
   };
-
-  // const disable = () => {
-  //   interact(interactRef.current as unknown as HTMLElement).unset();
-  // };
-
   useEffect(() => {
     if (interactRef.current) enable();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    setPosition({ x: position.x, y: position.y });
+  }, [position.x, position.y]);
   return {
     ref: interactRef,
     style: {

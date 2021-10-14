@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { OpinionsFragment } from "src/apollo/graphql";
+import { useBranistorming_UpdateOpinionPositionMutation } from "src/apollo/graphql";
 import { useBranistorming_EnableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_DisableOpinionMutation } from "src/apollo/graphql";
 import { useBranistorming_UpdateOpinionMutation } from "src/apollo/graphql";
@@ -112,7 +113,6 @@ const ActionButton: VFC<ActionButton> = (props) => {
 };
 
 const OptionItem: VFC<OptionItem> = (props) => {
-  const interact = useInteractJS();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [opinion, setOpinion] = useState<string>(props.item.opinion);
   const [isDisable, setIsDisable] = useState<boolean>(
@@ -125,6 +125,19 @@ const OptionItem: VFC<OptionItem> = (props) => {
     formState: { errors },
   } = useForm<OpinionForm>();
   const [updateOpinion] = useBranistorming_UpdateOpinionMutation();
+  const [updatePosition] = useBranistorming_UpdateOpinionPositionMutation();
+  const handleChangePosition = (x: number, y: number) => {
+    updatePosition({
+      variables: { id: props.item.id, position_x: x, position_y: y },
+    });
+  };
+  const interact = useInteractJS({
+    position: {
+      x: props.item.position_x,
+      y: props.item.position_y,
+    },
+    fn: handleChangePosition,
+  });
   const handleEdited = handleSubmit((data) => {
     if (opinion !== data.opinion) {
       setOpinion(data.opinion);
@@ -146,58 +159,56 @@ const OptionItem: VFC<OptionItem> = (props) => {
   }, [props.item.disable_flag]);
   return (
     <div
-      className={`border inline-block w-52 p-2 pt-4 shadow-sm rounded-sm text-left relative ml-2 mt-2 group ${
+      className={`border inline-block w-52 p-2 pt-4 shadow-sm rounded-sm text-left relative ml-2 mt-2 group  ${
         isDisable ? "bg-gray-100" : "bg-white "
       }`}
       ref={interact.ref}
       style={{ ...interact.style }}
     >
-      <div>
-        <div className="absolute top-0 right-0 flex items-center">
-          <ActionButton
-            id={props.item.id}
-            isDisable={isDisable}
-            isEdit={isEdit}
-            setIsEdit={setIsEdit}
-            setIsDisable={setIsDisable}
-            handleCancelEdit={onHandleCancelEdit}
-          />
-        </div>
-
-        {isEdit ? (
-          <div className="text-right">
-            <textarea
-              {...register("opinion", {
-                required: "入力してください。",
-                maxLength: {
-                  value: 100,
-                  message: "100文字以下で入力してください",
-                },
-              })}
-              defaultValue={opinion}
-              className="focus:outline-none w-full "
-            />
-            <button
-              className="text-xs bg-blue-600 rounded-xl text-white py-1 px-2"
-              onClick={handleEdited}
-            >
-              編集終了
-            </button>
-            {errors.opinion?.message && (
-              <ErrorMessage message={errors.opinion.message} className="mt-1" />
-            )}
-          </div>
-        ) : (
-          <p className={isDisable ? "text-gray-400" : ""}>{opinion}</p>
-        )}
+      <div className="absolute top-0 right-0 flex items-center">
+        <ActionButton
+          id={props.item.id}
+          isDisable={isDisable}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          setIsDisable={setIsDisable}
+          handleCancelEdit={onHandleCancelEdit}
+        />
       </div>
+
+      {isEdit ? (
+        <div className="text-right">
+          <textarea
+            {...register("opinion", {
+              required: "入力してください。",
+              maxLength: {
+                value: 100,
+                message: "100文字以下で入力してください",
+              },
+            })}
+            defaultValue={opinion}
+            className="focus:outline-none w-full "
+          />
+          <button
+            className="text-xs bg-blue-600 rounded-xl text-white py-1 px-2"
+            onClick={handleEdited}
+          >
+            編集終了
+          </button>
+          {errors.opinion?.message && (
+            <ErrorMessage message={errors.opinion.message} className="mt-1" />
+          )}
+        </div>
+      ) : (
+        <p className={isDisable ? "text-gray-400" : ""}>{opinion}</p>
+      )}
     </div>
   );
 };
 
 export const OpinionList: VFC<Props> = (props) => {
   return (
-    <div className="flex flex-wrap">
+    <div>
       {props.opinionList.map((item) => {
         return <OptionItem item={item} key={item.id} />;
       })}
@@ -210,6 +221,8 @@ gql`
     id
     opinion
     disable_flag
+    position_x
+    position_y
   }
 `;
 
@@ -230,13 +243,25 @@ gql`
       ...Opinions
     }
   }
-
   mutation Branistorming_EnableOpinion($id: uuid!) {
     update_branistorming_opinions_by_pk(
       pk_columns: { id: $id }
       _set: { disable_flag: 0 }
     ) {
       ...Opinions
+    }
+  }
+  mutation Branistorming_UpdateOpinionPosition(
+    $id: uuid!
+    $position_x: Float!
+    $position_y: Float!
+  ) {
+    update_branistorming_opinions_by_pk(
+      pk_columns: { id: $id }
+      _set: { position_x: $position_x, position_y: $position_y }
+    ) {
+      position_x
+      position_y
     }
   }
 `;
