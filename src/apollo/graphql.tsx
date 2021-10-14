@@ -18,6 +18,19 @@ export type Scalars = {
 };
 
 
+/** Boolean expression to compare columns of type "Float". All fields are combined with logical 'AND'. */
+export type Float_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Float']>;
+  _gt?: Maybe<Scalars['Float']>;
+  _gte?: Maybe<Scalars['Float']>;
+  _in?: Maybe<Array<Scalars['Float']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Float']>;
+  _lte?: Maybe<Scalars['Float']>;
+  _neq?: Maybe<Scalars['Float']>;
+  _nin?: Maybe<Array<Scalars['Float']>>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: Maybe<Scalars['Int']>;
@@ -346,6 +359,8 @@ export type Branistorming_Opinions = {
   disable_flag?: Maybe<Scalars['Int']>;
   id: Scalars['uuid'];
   opinion: Scalars['String'];
+  position_x: Scalars['Float'];
+  position_y: Scalars['Float'];
   updated_at: Scalars['timestamptz'];
   user_id: Scalars['String'];
 };
@@ -406,11 +421,15 @@ export type Branistorming_Opinions_Arr_Rel_Insert_Input = {
 export type Branistorming_Opinions_Avg_Fields = {
   __typename?: 'branistorming_opinions_avg_fields';
   disable_flag?: Maybe<Scalars['Float']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Avg_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "branistorming_opinions". All fields are combined with a logical 'AND'. */
@@ -424,6 +443,8 @@ export type Branistorming_Opinions_Bool_Exp = {
   disable_flag?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   opinion?: Maybe<String_Comparison_Exp>;
+  position_x?: Maybe<Float_Comparison_Exp>;
+  position_y?: Maybe<Float_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
@@ -437,6 +458,8 @@ export enum Branistorming_Opinions_Constraint {
 /** input type for incrementing numeric columns in table "branistorming_opinions" */
 export type Branistorming_Opinions_Inc_Input = {
   disable_flag?: Maybe<Scalars['Int']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** input type for inserting data into table "branistorming_opinions" */
@@ -447,6 +470,8 @@ export type Branistorming_Opinions_Insert_Input = {
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   opinion?: Maybe<Scalars['String']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -459,6 +484,8 @@ export type Branistorming_Opinions_Max_Fields = {
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   opinion?: Maybe<Scalars['String']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -470,6 +497,8 @@ export type Branistorming_Opinions_Max_Order_By = {
   disable_flag?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   opinion?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -482,6 +511,8 @@ export type Branistorming_Opinions_Min_Fields = {
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   opinion?: Maybe<Scalars['String']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -493,6 +524,8 @@ export type Branistorming_Opinions_Min_Order_By = {
   disable_flag?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   opinion?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -521,6 +554,8 @@ export type Branistorming_Opinions_Order_By = {
   disable_flag?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   opinion?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -543,6 +578,10 @@ export enum Branistorming_Opinions_Select_Column {
   /** column name */
   Opinion = 'opinion',
   /** column name */
+  PositionX = 'position_x',
+  /** column name */
+  PositionY = 'position_y',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
@@ -555,6 +594,8 @@ export type Branistorming_Opinions_Set_Input = {
   disable_flag?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   opinion?: Maybe<Scalars['String']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -563,44 +604,60 @@ export type Branistorming_Opinions_Set_Input = {
 export type Branistorming_Opinions_Stddev_Fields = {
   __typename?: 'branistorming_opinions_stddev_fields';
   disable_flag?: Maybe<Scalars['Float']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Stddev_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Branistorming_Opinions_Stddev_Pop_Fields = {
   __typename?: 'branistorming_opinions_stddev_pop_fields';
   disable_flag?: Maybe<Scalars['Float']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Stddev_Pop_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Branistorming_Opinions_Stddev_Samp_Fields = {
   __typename?: 'branistorming_opinions_stddev_samp_fields';
   disable_flag?: Maybe<Scalars['Float']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Stddev_Samp_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Branistorming_Opinions_Sum_Fields = {
   __typename?: 'branistorming_opinions_sum_fields';
   disable_flag?: Maybe<Scalars['Int']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by sum() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Sum_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 /** update columns of table "branistorming_opinions" */
@@ -616,6 +673,10 @@ export enum Branistorming_Opinions_Update_Column {
   /** column name */
   Opinion = 'opinion',
   /** column name */
+  PositionX = 'position_x',
+  /** column name */
+  PositionY = 'position_y',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
@@ -625,33 +686,45 @@ export enum Branistorming_Opinions_Update_Column {
 export type Branistorming_Opinions_Var_Pop_Fields = {
   __typename?: 'branistorming_opinions_var_pop_fields';
   disable_flag?: Maybe<Scalars['Float']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Var_Pop_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Branistorming_Opinions_Var_Samp_Fields = {
   __typename?: 'branistorming_opinions_var_samp_fields';
   disable_flag?: Maybe<Scalars['Float']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Var_Samp_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Branistorming_Opinions_Variance_Fields = {
   __typename?: 'branistorming_opinions_variance_fields';
   disable_flag?: Maybe<Scalars['Float']>;
+  position_x?: Maybe<Scalars['Float']>;
+  position_y?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "branistorming_opinions" */
 export type Branistorming_Opinions_Variance_Order_By = {
   disable_flag?: Maybe<Order_By>;
+  position_x?: Maybe<Order_By>;
+  position_y?: Maybe<Order_By>;
 };
 
 
@@ -960,7 +1033,7 @@ export type Branistorming_DeleteAllOpinionMutation = (
     { __typename?: 'branistorming_opinions_mutation_response' }
     & { returning: Array<(
       { __typename?: 'branistorming_opinions' }
-      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
     )> }
   )> }
 );
@@ -976,7 +1049,7 @@ export type Branistorming_DeleteDisableOpinionMutation = (
     { __typename?: 'branistorming_opinions_mutation_response' }
     & { returning: Array<(
       { __typename?: 'branistorming_opinions' }
-      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
     )> }
   )> }
 );
@@ -992,13 +1065,13 @@ export type Branistorming_PostOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { insert_branistorming_opinions_one?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
   )> }
 );
 
 export type OpinionsFragment = (
   { __typename?: 'branistorming_opinions' }
-  & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+  & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
 );
 
 export type Branistorming_UpdateOpinionMutationVariables = Exact<{
@@ -1011,7 +1084,7 @@ export type Branistorming_UpdateOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
   )> }
 );
 
@@ -1024,7 +1097,7 @@ export type Branistorming_DisableOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
   )> }
 );
 
@@ -1037,7 +1110,22 @@ export type Branistorming_EnableOpinionMutation = (
   { __typename?: 'mutation_root' }
   & { update_branistorming_opinions_by_pk?: Maybe<(
     { __typename?: 'branistorming_opinions' }
-    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+    & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
+  )> }
+);
+
+export type Branistorming_UpdateOpinionPositionMutationVariables = Exact<{
+  id: Scalars['uuid'];
+  position_x: Scalars['Float'];
+  position_y: Scalars['Float'];
+}>;
+
+
+export type Branistorming_UpdateOpinionPositionMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_branistorming_opinions_by_pk?: Maybe<(
+    { __typename?: 'branistorming_opinions' }
+    & Pick<Branistorming_Opinions, 'position_x' | 'position_y'>
   )> }
 );
 
@@ -1053,7 +1141,7 @@ export type Branistorming_GetBoradSubscription = (
     & Pick<Borad, 'id' | 'connect_num' | 'delete_date' | 'delete_flag' | 'brainstorming_theme'>
     & { branistorming_opinions: Array<(
       { __typename?: 'branistorming_opinions' }
-      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag'>
+      & Pick<Branistorming_Opinions, 'id' | 'opinion' | 'disable_flag' | 'position_x' | 'position_y'>
     )> }
   )> }
 );
@@ -1090,6 +1178,8 @@ export const OpinionsFragmentDoc = gql`
   id
   opinion
   disable_flag
+  position_x
+  position_y
 }
     `;
 export const Branistorming_DeleteAllOpinionDocument = gql`
@@ -1310,6 +1400,45 @@ export function useBranistorming_EnableOpinionMutation(baseOptions?: Apollo.Muta
 export type Branistorming_EnableOpinionMutationHookResult = ReturnType<typeof useBranistorming_EnableOpinionMutation>;
 export type Branistorming_EnableOpinionMutationResult = Apollo.MutationResult<Branistorming_EnableOpinionMutation>;
 export type Branistorming_EnableOpinionMutationOptions = Apollo.BaseMutationOptions<Branistorming_EnableOpinionMutation, Branistorming_EnableOpinionMutationVariables>;
+export const Branistorming_UpdateOpinionPositionDocument = gql`
+    mutation Branistorming_UpdateOpinionPosition($id: uuid!, $position_x: Float!, $position_y: Float!) {
+  update_branistorming_opinions_by_pk(
+    pk_columns: {id: $id}
+    _set: {position_x: $position_x, position_y: $position_y}
+  ) {
+    position_x
+    position_y
+  }
+}
+    `;
+export type Branistorming_UpdateOpinionPositionMutationFn = Apollo.MutationFunction<Branistorming_UpdateOpinionPositionMutation, Branistorming_UpdateOpinionPositionMutationVariables>;
+
+/**
+ * __useBranistorming_UpdateOpinionPositionMutation__
+ *
+ * To run a mutation, you first call `useBranistorming_UpdateOpinionPositionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useBranistorming_UpdateOpinionPositionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [branistormingUpdateOpinionPositionMutation, { data, loading, error }] = useBranistorming_UpdateOpinionPositionMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      position_x: // value for 'position_x'
+ *      position_y: // value for 'position_y'
+ *   },
+ * });
+ */
+export function useBranistorming_UpdateOpinionPositionMutation(baseOptions?: Apollo.MutationHookOptions<Branistorming_UpdateOpinionPositionMutation, Branistorming_UpdateOpinionPositionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Branistorming_UpdateOpinionPositionMutation, Branistorming_UpdateOpinionPositionMutationVariables>(Branistorming_UpdateOpinionPositionDocument, options);
+      }
+export type Branistorming_UpdateOpinionPositionMutationHookResult = ReturnType<typeof useBranistorming_UpdateOpinionPositionMutation>;
+export type Branistorming_UpdateOpinionPositionMutationResult = Apollo.MutationResult<Branistorming_UpdateOpinionPositionMutation>;
+export type Branistorming_UpdateOpinionPositionMutationOptions = Apollo.BaseMutationOptions<Branistorming_UpdateOpinionPositionMutation, Branistorming_UpdateOpinionPositionMutationVariables>;
 export const Branistorming_GetBoradDocument = gql`
     subscription Branistorming_GetBorad($id: String!) {
   borad_by_pk(id: $id) {

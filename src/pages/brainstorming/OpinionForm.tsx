@@ -10,7 +10,7 @@ import { useInteractJS } from "src/utils/hooks/useInteractJS";
 export type OpinionForm = Pick<OpinionsFragment, "opinion">;
 
 export const OpinionForm: VFC = () => {
-  const interact = useInteractJS();
+  const interact = useInteractJS({});
   const {
     register,
     handleSubmit,
