@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { useRouter } from "next/dist/client/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   useBrainstorming_PostThemeMutation,
@@ -26,6 +26,7 @@ const BrainstormingPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<{ theme: string }>();
   const [postTheme] = useBrainstorming_PostThemeMutation();
   const handleFocus = () => {
@@ -49,6 +50,10 @@ const BrainstormingPage = () => {
     }
     setIsFocus(false);
   });
+
+  useEffect(() => {
+    setValue("theme", data?.borad_by_pk?.brainstorming_theme ?? "");
+  }, [setValue, data?.borad_by_pk?.brainstorming_theme]);
 
   if (error) return <div>error</div>;
   if (!data?.borad_by_pk) {
