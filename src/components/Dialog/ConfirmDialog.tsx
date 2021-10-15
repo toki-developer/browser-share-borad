@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import type { DOMAttributes, VFC } from "react";
-import { Fragment, useRef } from "react";
+import { Fragment } from "react";
 
 type Props = {
   show: boolean;
@@ -10,12 +10,7 @@ type Props = {
   description: string;
 };
 
-/**
- * @package
- */
 export const ConfirmDialog: VFC<Props> = (props) => {
-  const buttonRef = useRef(null);
-
   return (
     <Transition.Root show={props.show} as={Fragment}>
       <Dialog
@@ -23,7 +18,6 @@ export const ConfirmDialog: VFC<Props> = (props) => {
         className="overflow-y-auto fixed inset-0 z-10"
         open={props.show}
         onClose={props.onClose}
-        initialFocus={buttonRef}
       >
         <div className="text-center">
           <Transition.Child
@@ -67,7 +61,6 @@ export const ConfirmDialog: VFC<Props> = (props) => {
                 <button
                   className="flex-1 py-2 text-sm text-blue-500 font-bold"
                   onClick={props.onClose}
-                  ref={buttonRef}
                 >
                   キャンセル
                 </button>

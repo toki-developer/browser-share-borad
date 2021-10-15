@@ -6,6 +6,7 @@ type Props = {
   setIsLoading: (v: boolean) => void;
 };
 
+//todo:使い方の説明を作る
 const Usage: VFC = () => {
   return <div>{/* <h2>使い方</h2> */}</div>;
 };

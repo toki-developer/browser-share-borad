@@ -24,7 +24,7 @@ export const OpinionForm: VFC = () => {
       variables: {
         borad_id: (router.query.id as string) ?? "",
         opinion: data.opinion,
-        user_id: "1",
+        user_id: "1", //今後端末の状態を取得して編集権限とかをするためのuser。今は固定で1にしてる。
       },
     });
     setValue("opinion", "");

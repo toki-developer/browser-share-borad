@@ -12,7 +12,7 @@ import { ErrorMessage } from "src/components/Error";
 import type { OpinionForm } from "src/pages/brainstorming/OpinionForm";
 import { useInteractJS } from "src/utils/hooks/useInteractJS";
 
-type ActionButton = {
+type MenuButtonProps = {
   id: string;
   isDisable: boolean;
   isEdit: boolean;
@@ -21,15 +21,11 @@ type ActionButton = {
   handleCancelEdit: () => void;
 };
 
-type OptionItem = {
-  item: OpinionsFragment;
-};
-
 type Props = {
   opinionList: OpinionsFragment[];
 };
 
-const ActionButton: VFC<ActionButton> = (props) => {
+const MenuButton: VFC<MenuButtonProps> = (props) => {
   const [disableOpinion] = useBranistorming_DisableOpinionMutation();
   const [enableOpinion] = useBranistorming_EnableOpinionMutation();
   const handleEdit = () => {
@@ -112,12 +108,10 @@ const ActionButton: VFC<ActionButton> = (props) => {
   );
 };
 
-const OptionItem: VFC<OptionItem> = (props) => {
+const OpinionItem: VFC<OpinionsFragment> = (props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [opinion, setOpinion] = useState<string>(props.item.opinion);
-  const [isDisable, setIsDisable] = useState<boolean>(
-    props.item.disable_flag == 1
-  );
+  const [opinion, setOpinion] = useState<string>(props.opinion);
+  const [isDisable, setIsDisable] = useState<boolean>(props.disable_flag == 1);
   const {
     register,
     handleSubmit,
@@ -128,13 +122,13 @@ const OptionItem: VFC<OptionItem> = (props) => {
   const [updatePosition] = useBranistorming_UpdateOpinionPositionMutation();
   const handleChangePosition = (x: number, y: number) => {
     updatePosition({
-      variables: { id: props.item.id, position_x: x, position_y: y },
+      variables: { id: props.id, position_x: x, position_y: y },
     });
   };
   const interact = useInteractJS({
     position: {
-      x: props.item.position_x,
-      y: props.item.position_y,
+      x: props.position_x,
+      y: props.position_y,
     },
     fn: handleChangePosition,
   });
@@ -142,7 +136,7 @@ const OptionItem: VFC<OptionItem> = (props) => {
     if (opinion !== data.opinion) {
       setOpinion(data.opinion);
       updateOpinion({
-        variables: { id: props.item.id, opinion: data.opinion },
+        variables: { id: props.id, opinion: data.opinion },
       });
     }
     setIsEdit(false);
@@ -152,11 +146,11 @@ const OptionItem: VFC<OptionItem> = (props) => {
     setIsEdit(false);
   };
   useEffect(() => {
-    setOpinion(props.item.opinion);
-  }, [props.item.opinion]);
+    setOpinion(props.opinion);
+  }, [props.opinion]);
   useEffect(() => {
-    setIsDisable(props.item.disable_flag == 1);
-  }, [props.item.disable_flag]);
+    setIsDisable(props.disable_flag == 1);
+  }, [props.disable_flag]);
   return (
     <div
       className={`border inline-block w-52 p-2 pt-4 shadow-sm rounded-sm text-left relative ml-2 mt-2 group  ${
@@ -166,8 +160,8 @@ const OptionItem: VFC<OptionItem> = (props) => {
       style={{ ...interact.style }}
     >
       <div className="absolute top-0 right-0 flex items-center">
-        <ActionButton
-          id={props.item.id}
+        <MenuButton
+          id={props.id}
           isDisable={isDisable}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
@@ -210,7 +204,7 @@ export const OpinionList: VFC<Props> = (props) => {
   return (
     <div>
       {props.opinionList.map((item) => {
-        return <OptionItem item={item} key={item.id} />;
+        return <OpinionItem {...item} key={item.id} />;
       })}
     </div>
   );
