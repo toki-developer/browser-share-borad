@@ -8,11 +8,7 @@ const Home = () => {
   if (isLoading) {
     return <LoadingIcon isCenter />;
   }
-  return (
-    <div>
-      <Brainstorming setIsLoading={setIsLoading} />
-    </div>
-  );
+  return <Brainstorming setIsLoading={setIsLoading} />;
 };
 
 export default Home;

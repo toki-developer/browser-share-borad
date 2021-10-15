@@ -1,12 +1,12 @@
 import { gql } from "@apollo/client";
 import { useRouter } from "next/dist/client/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   useBrainstorming_PostThemeMutation,
   useBranistorming_GetBoradSubscription,
 } from "src/apollo/graphql";
-import { ErrorMessage } from "src/components/Error";
+import { Error, ErrorMessage } from "src/components/Error";
 import { LoadingIcon } from "src/components/Loading";
 import { Layout } from "src/layout";
 import { DeleteButton } from "src/pages/brainstorming/DeleteButton";
@@ -15,17 +15,16 @@ import { OpinionList } from "src/pages/brainstorming/OpinionList";
 
 const BrainstormingPage = () => {
   const router = useRouter();
-
   const { data, error } = useBranistorming_GetBoradSubscription({
     variables: { id: (router.query.id as string) ?? "" },
   });
-
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isPosted, setIsPosted] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<{ theme: string }>();
   const [postTheme] = useBrainstorming_PostThemeMutation();
   const handleFocus = () => {
@@ -50,7 +49,11 @@ const BrainstormingPage = () => {
     setIsFocus(false);
   });
 
-  if (error) return <div>error</div>;
+  useEffect(() => {
+    setValue("theme", data?.borad_by_pk?.brainstorming_theme ?? "");
+  }, [setValue, data?.borad_by_pk?.brainstorming_theme]);
+
+  if (error) return <Error />;
   if (!data?.borad_by_pk) {
     return <LoadingIcon isCenter />;
   }
