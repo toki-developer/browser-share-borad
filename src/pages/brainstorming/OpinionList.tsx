@@ -28,6 +28,7 @@ type Props = {
 const MenuButton: VFC<MenuButtonProps> = (props) => {
   const [disableOpinion] = useBranistorming_DisableOpinionMutation();
   const [enableOpinion] = useBranistorming_EnableOpinionMutation();
+  const [isError, setIsError] = useState<boolean>(false);
   const handleEdit = () => {
     props.setIsEdit(true);
   };
@@ -37,12 +38,27 @@ const MenuButton: VFC<MenuButtonProps> = (props) => {
       return;
     }
     props.setIsDisable(true);
-    disableOpinion({ variables: { id: props.id } });
+    disableOpinion({ variables: { id: props.id } }).catch(() => {
+      setIsError(true);
+      props.setIsDisable(false);
+      setTimeout(() => {
+        return setIsError(false);
+      }, 2000);
+    });
   };
   const handleEnable = () => {
     props.setIsDisable(false);
-    enableOpinion({ variables: { id: props.id } });
+    enableOpinion({ variables: { id: props.id } }).catch(() => {
+      setIsError(true);
+      props.setIsDisable(true);
+      setTimeout(() => {
+        return setIsError(false);
+      }, 2000);
+    });
   };
+  if (isError) {
+    return <ErrorMessage message="エラーが発生しました。" />;
+  }
   if (props.isDisable)
     return (
       <button onClick={handleEnable} className="text-blue-500">
@@ -112,6 +128,8 @@ const OpinionItem: VFC<OpinionsFragment> = (props) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [opinion, setOpinion] = useState<string>(props.opinion);
   const [isDisable, setIsDisable] = useState<boolean>(props.disable_flag == 1);
+  const [isError, setIsError] = useState<boolean>(false);
+
   const {
     register,
     handleSubmit,
@@ -134,9 +152,16 @@ const OpinionItem: VFC<OpinionsFragment> = (props) => {
   });
   const handleEdited = handleSubmit((data) => {
     if (opinion !== data.opinion) {
+      const prevOpinion = opinion;
       setOpinion(data.opinion);
       updateOpinion({
         variables: { id: props.id, opinion: data.opinion },
+      }).catch(() => {
+        setIsError(true);
+        setOpinion(prevOpinion);
+        setTimeout(() => {
+          return setIsError(false);
+        }, 2000);
       });
     }
     setIsEdit(false);
@@ -160,14 +185,18 @@ const OpinionItem: VFC<OpinionsFragment> = (props) => {
       style={{ ...interact.style }}
     >
       <div className="absolute top-0 right-0 flex items-center">
-        <MenuButton
-          id={props.id}
-          isDisable={isDisable}
-          isEdit={isEdit}
-          setIsEdit={setIsEdit}
-          setIsDisable={setIsDisable}
-          handleCancelEdit={onHandleCancelEdit}
-        />
+        {isError ? (
+          <ErrorMessage message="エラーが発生しました。" />
+        ) : (
+          <MenuButton
+            id={props.id}
+            isDisable={isDisable}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+            setIsDisable={setIsDisable}
+            handleCancelEdit={onHandleCancelEdit}
+          />
+        )}
       </div>
 
       {isEdit ? (
